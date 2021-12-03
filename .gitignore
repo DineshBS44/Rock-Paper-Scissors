@@ -1,2 +1,5 @@
 ml-model/model.zip
 server/my_model
+.env
+client/node_modules
+client/.env
