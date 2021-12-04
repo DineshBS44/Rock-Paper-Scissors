@@ -30,22 +30,18 @@ def predict():
     print("Output: ", Output)
     print(type(Output[0][0]))
 
-    mostProbable = 0.0
-    prediction = "None"
-    for i in range(3):
-        if float(Output[0][i]) > mostProbable:
-            mostProbable = float(Output[0][i])
-            if i == 0:
-                prediction = "Rock"
-            elif i == 1:
-                prediction = "Paper"
-            else:
-                prediction = "Scissors"
-    
-    print("Prediction: ", prediction)
+    outputList = [[Output[0][0], "Rock"], [Output[0][1], "Paper"], [Output[0][2], "Scissors"]]
+    outputList.sort(reverse=True)
+
+    print(outputList)
 
     return jsonify({
-        'Prediction': prediction
+        'MostLikelyPrediction': str(outputList[0][1]),
+        'MostLikelyPredictionProbability': str(round(float(outputList[0][0]), 6)),
+        'SecondMostLikelyPrediction': str(outputList[1][1]),
+        'SecondMostLikelyPredictionProbability': str(round(float(outputList[1][0]), 6)),
+        'ThirdMostLikelyPrediction': str(outputList[2][1]),
+        'ThirdMostLikelyPredictionProbability': str(round(float(outputList[2][0]), 6))
     })
 
 
